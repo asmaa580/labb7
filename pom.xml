@@ -10,4 +10,11 @@
         <maven.compiler.release>21</maven.compiler.release>
         <exec.mainClass>com.mycompany.labb7.Labb7</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20230618</version>
+        </dependency>
+    </dependencies>
 </project>
