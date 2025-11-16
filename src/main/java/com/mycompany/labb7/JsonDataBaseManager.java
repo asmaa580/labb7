@@ -19,7 +19,16 @@ public class JsonDataBaseManager {
     private static final String COURSES_FILE = "courses.json";
 
     private static JSONArray loadJson(String file) throws IOException {
-        String content = Files.exists(Paths.get(file)) ? Files.readString(Paths.get(file)) : "[]";
+        Path path = Paths.get(file);
+
+        
+        if (!Files.exists(path)) {
+            Files.writeString(path, "[]");
+            return new JSONArray(); 
+        }
+
+        String content = Files.readString(path);
+        if (content.isEmpty()) content = "[]"; 
         return new JSONArray(content);
     }
 

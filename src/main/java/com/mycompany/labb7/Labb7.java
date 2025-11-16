@@ -3,8 +3,8 @@
  */
 
 package com.mycompany.labb7;
-import model.*;
-import util.*;
+//import model.*;
+//import util.*;
 import java.io.IOException;
 
  /**
@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author USER
  */
 public class Labb7 {
-
+/*
 
     public static void main(String[] args) {
         try {
@@ -84,5 +84,5 @@ public class Labb7 {
         } catch (RuntimeException e) {
             System.out.println("Error: " + e.getMessage());
         }
-    }
+    }*/
 }
