@@ -59,6 +59,11 @@ public class login extends javax.swing.JFrame {
         });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "instructor", "student" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -122,50 +127,39 @@ public class login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-           String u= jComboBox1.getSelectedItem().toString();
-     //signdatabase p =new signdatabase("pass.txt");
-//p.readFromFile();
+String u= jComboBox1.getSelectedItem().toString();
 boolean flag=false;
-//for(sign record:p.viewsign())
-//{//if(jTextField1.getText().equals(record.getUsername())&&jTextField2.getText().equals(record.getPassword()))
-
-try{
-    String email= jTextField1.getText();
-String password= jTextField2.getText();
-JsonDataBaseManager db=new JsonDataBaseManager();
-JSONArray users=db.loadJson("Users.json");
-SecurityHashing passwordHash=new SecurityHashing();
-
-for (int i = 0; i < users.length(); i++) {
-    JSONObject user = users.getJSONObject(i);
-    String password1 = user.getString("passwordHash");
-    if(password1.equals(passwordHash.hashPassword(password)));
-  
-}
-
-    String s=db.authenticate(email,passwordHash.hashPassword(password)).getRole();
-  if(s!=null) 
-  {
-    JOptionPane.showMessageDialog(this,"Login Successful");
-   
-       
-        Student studentFrame = new Student();
-        studentFrame.setVisible(true);
-        
-        
-        this.dispose();  
-        flag = true;
-    }
-
-else if(u.equalsIgnoreCase("instructor"))
+try
 {
-   Instructor1 instructorFrame = new Instructor1();
-        instructorFrame.setVisible(true);
+        String email= jTextField1.getText();
+        String password= jTextField2.getText();
+        JsonDataBaseManager db=new JsonDataBaseManager();
+
+        SecurityHashing passwordHash=new SecurityHashing();
+        String s=db.authenticate(email,passwordHash.hashPassword(password)).getRole();
+      if(s.equals("Student")&&u.equals("student")) 
+      {
+        JOptionPane.showMessageDialog(this,"Login Successful");
         
-        
-        this.dispose();  
-        flag = true;
-}
+            Student studentFrame = new Student();
+            studentFrame.setVisible(true);
+            
+            this.dispose();  
+            flag = true;
+        }
+
+    else if(s.equals("Instructor")&&u.equals("instructor"))
+    {
+        JOptionPane.showMessageDialog(this,"Login Successful");
+         Instructor1 instructorFrame = new Instructor1();
+          instructorFrame.setVisible(true);
+
+
+            this.dispose();  
+            flag = true;
+    } 
+    else 
+       JOptionPane.showMessageDialog(this,"Wrong choice of User");
 }
 catch(Exception e)
 {
@@ -183,6 +177,10 @@ JOptionPane.showMessageDialog(this,"Invalid Username or Password");
     signupFrame.setVisible(true);       
     this.dispose();               
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
