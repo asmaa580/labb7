@@ -1,4 +1,4 @@
-
+package com.mycompany.labb7;
 import javax.swing.JOptionPane;
 
 /*
