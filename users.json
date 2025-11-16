@@ -48,5 +48,13 @@
         "email": "aseel@gmail.com",
         "passwordHash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
         "username": "aseel"
+    },
+    {
+        "role": "Instructor",
+        "createdCourses": [],
+        "userId": "e4e0efbf-b7bb-4ade-bf13-70555e773d72",
+        "email": "asmaa@gmail.com",
+        "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "username": "asmaa"
     }
 ]
