@@ -2,7 +2,7 @@ package com.mycompany.labb7;
 import javax.swing.JOptionPane;
 import com.mycompany.labb7.Student;
 import com.mycompany.labb7.Instructor1;
-import com.mycompany.labb7.SignUp;
+import com.mycompany.labb7.SignUp1;
 
 
 /*
@@ -154,10 +154,9 @@ else {JOptionPane.showMessageDialog(this,"Invalid Username or Password");
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-              SignUp newwindow=new SignUp();
-this.setContentPane(newwindow);
-revalidate();
-repaint();// TODO add your handling code here:
+             SignUp1 signupFrame = new SignUp1();  
+    signupFrame.setVisible(true);       
+    this.dispose();               
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
