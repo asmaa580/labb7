@@ -92,6 +92,8 @@ public class JsonDataBaseManager {
 
     public static ArrayList<Course> getAllCourses() throws IOException {
         JSONArray coursesArray = loadJson(COURSES_FILE);
+        if (coursesArray.length() == 0) 
+        return null;
         ArrayList<Course> courses = new ArrayList<>();
         for (int i = 0; i < coursesArray.length(); i++) {
             JSONObject obj = coursesArray.getJSONObject(i);
@@ -100,4 +102,5 @@ public class JsonDataBaseManager {
         }
         return courses;
     }
+    
 }

@@ -1,0 +1,39 @@
+[
+    {
+      "courseId": "C001",
+      "title": "Java Programming",
+      "description": "Learn the basics of Java",
+      "instructorId": "U002",
+      "lessons": [
+        {
+          "lessonId": "L001",
+          "title": "Introduction to Java",
+          "content": "Java is a programming language...",
+          "resources": ["slides.pdf", "video.mp4"]
+        },
+        {
+          "lessonId": "L002",
+          "title": "Variables and Data Types",
+          "content": "Variables store data...",
+          "resources": []
+        }
+      ],
+      "students": ["U001"]
+    },
+    {
+      "courseId": "C002",
+      "title": "Python Programming",
+      "description": "Learn Python from scratch",
+      "instructorId": "U003",
+      "lessons": [
+        {
+          "lessonId": "L003",
+          "title": "Introduction to Python",
+          "content": "Python is a programming language...",
+          "resources": ["python_intro.pdf"]
+        }
+      ],
+      "students": []
+    }
+  ]
+  
