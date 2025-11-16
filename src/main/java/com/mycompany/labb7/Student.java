@@ -6,6 +6,8 @@ package com.mycompany.labb7;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -55,6 +57,9 @@ JOptionPane.showMessageDialog(this,"No available courses");
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        enroll = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        idInput = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
@@ -73,20 +78,56 @@ JOptionPane.showMessageDialog(this,"No available courses");
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        enroll.setText("Enroll");
+        enroll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enrollActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setText("Student Id:");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        idInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idInputActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 25, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(94, Short.MAX_VALUE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
+                .addComponent(idInput, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(enroll)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(enroll)
+                .addGap(77, 77, 77))
         );
 
         jTabbedPane1.addTab("browse", jPanel1);
@@ -99,7 +140,7 @@ JOptionPane.showMessageDialog(this,"No available courses");
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 287, Short.MAX_VALUE)
+            .addGap(0, 378, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("enroll", jPanel2);
@@ -117,17 +158,17 @@ JOptionPane.showMessageDialog(this,"No available courses");
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane1)
             .addGroup(layout.createSequentialGroup()
-                .addGap(152, 152, 152)
+                .addGap(145, 145, 145)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(0, 29, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -145,6 +186,70 @@ JOptionPane.showMessageDialog(this,"No available courses");
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void enrollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollActionPerformed
+        // TODO add your handling code here:
+         DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+    int selectedRow = jTable1.getSelectedRow();
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a course to enroll.");
+        return;
+    }
+
+    Object courseId = tableModel.getValueAt(selectedRow, 0);
+
+    int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to enroll course \"" + courseId +  ")?",
+            "Confirm enrollment",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+    );
+    
+     if (confirm == JOptionPane.YES_OPTION) {
+         try 
+         {
+         JsonDataBaseManager dbm=new JsonDataBaseManager();
+          ArrayList <Course> allCourses = new ArrayList<>();
+        allCourses=dbm.getAllCourses();
+        for (Course c : allCourses)
+        {
+            if( c.getCourseId().equals((String)courseId))
+            {
+                c.enrollStudent(idInput.getText());
+               JSONArray usersArray = new JSONArray();
+            dbm.saveJson("users.json", usersArray);
+            JSONArray coursesArray = new JSONArray();
+             for (Course course : allCourses) {
+                JSONObject courseObj = new JSONObject();
+                courseObj.put("courseId", course.getCourseId());
+                courseObj.put("title", course.getTitle());
+                courseObj.put("description", course.getDescription());
+                courseObj.put("instructorId", course.getInstructorId());
+                courseObj.put("students", course.getStudents());
+                coursesArray.put(courseObj);
+            }
+            dbm.saveJson("courses.json", coursesArray);
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "course enrolled successfully.");
+         }
+         catch(Exception e){JOptionPane.showMessageDialog(this,"No available courses");}
+     }
+          else 
+        JOptionPane.showMessageDialog(this, "Deletion cancelled.");
+    
+    }//GEN-LAST:event_enrollActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void idInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,11 +287,14 @@ JOptionPane.showMessageDialog(this,"No available courses");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton enroll;
+    private javax.swing.JTextField idInput;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

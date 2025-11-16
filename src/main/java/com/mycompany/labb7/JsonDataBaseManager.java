@@ -33,7 +33,7 @@ public class JsonDataBaseManager {
     }
 
     // Save JSONArray to file
-    private static void saveJson(String file, JSONArray array) throws IOException {
+    public static void saveJson(String file, JSONArray array) throws IOException {
         Files.writeString(Paths.get(file), array.toString(4));
     }
 

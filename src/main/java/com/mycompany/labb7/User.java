@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.labb7;
+import java.util.Random;
 import java.util.UUID;
 
 public abstract class User {
@@ -12,7 +13,8 @@ public abstract class User {
     protected String passwordHash;
 
     public User(String username, String email, String passwordHash) {
-        this.userId = UUID.randomUUID().toString();
+        Random rand = new Random();
+       this.userId = String.valueOf(rand.nextInt(10000));
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;

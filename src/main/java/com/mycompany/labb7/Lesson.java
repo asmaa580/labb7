@@ -9,6 +9,7 @@ package com.mycompany.labb7;
  * @author aseel
  */
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.UUID;
 
 public class Lesson {
@@ -25,7 +26,8 @@ public class Lesson {
     }
     
     public Lesson(String title, String content) {
-        this.lessonId = UUID.randomUUID().toString();
+       Random rand = new Random();
+       this.lessonId = String.valueOf(rand.nextInt(10000));
         this.title = title;
         this.content = content;
         this.resources = new ArrayList<>();

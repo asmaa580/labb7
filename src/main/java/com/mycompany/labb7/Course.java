@@ -4,6 +4,7 @@
  */
 package com.mycompany.labb7;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.UUID;
 /**
  *
@@ -27,7 +28,9 @@ public class Course {
     }
     
     public Course(String title, String description, String instructorId) {
-        this.courseId = UUID.randomUUID().toString();
+        
+        Random rand = new Random();
+       this.courseId = String.valueOf(rand.nextInt(10000));
         this.title = title;
         this.description = description;
         this.instructorId = instructorId;
