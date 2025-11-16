@@ -1,114 +1,18 @@
-
 [
     {
-        "description": "ds",
+        "description": "a",
         "students": [],
-        "title": "C1",
-        "courseId": "d5177ead-73e8-4663-a10d-6e15c99407b0",
-        "instructorId": "ac38b32c-ba6c-46fe-9c6b-a1e88c5d88f0"
-    },
-    {
-        "description": "ds",
-        "students": [],
-        "title": "C1",
-        "courseId": "5e90ac0a-3c66-497a-8d41-2bce2b0a448f",
-        "instructorId": "ac38b32c-ba6c-46fe-9c6b-a1e88c5d88f0"
-    },
-    {
-        "description": "ds",
-        "students": [],
-        "title": "C1",
-        "courseId": "7015916a-eaf8-40c8-926a-78e651bfbf82",
-        "instructorId": "ac38b32c-ba6c-46fe-9c6b-a1e88c5d88f0"
-    },
-    {
-        "description": "aaa",
-        "students": [],
-        "title": "new",
-        "courseId": "a487c3ae-d2b3-432b-93df-8af9c8f478d2",
-        "instructorId": "3a5fedd8-bc47-470c-9165-eb2f5a2e0440"
-    },
-    {
-        "description": "q",
-        "students": [],
-        "title": "q",
-        "courseId": "9f04694c-51cb-4d3f-a2d1-37a65fce89db",
-        "instructorId": "a7c126ca-7c44-4bb5-b564-5e09e1a24c5f"
+        "title": "a",
+        "courseId": "4981",
+        "instructorId": "9863",
+        "lessons": []
     },
     {
         "description": "b",
         "students": [],
         "title": "b",
-        "courseId": "6a042bdf-aad5-41e5-bc0b-ce03e4f291f9",
-        "instructorId": "b0235861-2a47-4c43-8f42-99984785e909"
-    },
-    {
-        "description": "c",
-        "students": [],
-        "title": "c",
-        "courseId": "6ce974ea-8e26-4283-be60-17f595892d92",
-        "instructorId": "dc8e50b2-3598-4e2f-8434-6e7e3d2ff189"
-    },
-    {
-        "description": "d",
-        "students": [],
-        "title": "d",
-        "courseId": "c803a457-d820-4bd2-b905-3f8df195ecbf",
-        "instructorId": "dc4a3b9b-30b3-4c2f-88c5-bf400a6f78c4"
-    },
-    {
-        "description": "f",
-        "students": [],
-        "title": "f",
-        "courseId": "379f3245-3fe5-4ba8-9521-fe0b228f6947",
-        "instructorId": "5344be3c-3afd-4521-8749-5a6749f98257"
-    },
-    {
-        "description": "e",
-        "students": [],
-        "title": "e",
-        "courseId": "ab8913ce-db51-43f9-9d64-283cfa17fec3",
-        "instructorId": "aeb739d5-b7e3-47dd-bf44-1d33afc6734f"
-    },
-    {
-        "description": "g",
-        "students": [],
-        "title": "g",
-        "courseId": "23e88f7e-2cbb-411a-8605-966d21b654f8",
-        "instructorId": "0671dbe5-ada8-42b2-afbc-9e748ad9c562"
-    },
-    {
-        "description": "k",
-        "students": [],
-        "title": "k",
-        "courseId": "d955523f-dd46-48fe-a682-cde5c81e20bf",
-        "instructorId": "10274094-1bb2-4109-b1f9-d3400c470be1"
-    },
-    {
-        "description": "Learn the basics of Java",
-        "students": [
-            "U001",
-            "9329"
-        ],
-        "title": "Java Programming",
-        "courseId": "C001",
-        "instructorId": "U002"
-    },
-    {
-        "description": "Learn Python from scratch",
-        "students": [],
-        "title": "Python Programming",
-        "courseId": "C002",
-        "instructorId": "U003"
+        "courseId": "2661",
+        "instructorId": "3646",
+        "lessons": []
     }
 ]
-
-[{
-    "description": "aa",
-    "students": [],
-    "title": "aaa",
-    "courseId": "0225f298-0bed-4f6d-b2d7-88203b5fd3b5",
-    "instructorId": "005b885b-540c-4e8c-8ea5-ac29a42cc0fa",
-    "lessons": []
-}]
-

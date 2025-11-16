@@ -1,12 +1,19 @@
-
-[]
-
-[{
-    "role": "Instructor",
-    "createdCourses": ["aaa"],
-    "userId": "005b885b-540c-4e8c-8ea5-ac29a42cc0fa",
-    "email": "asmaa@gmail.com",
-    "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-    "username": "asmaa"
-}]
-
+[
+    {
+        "role": "Instructor",
+        "createdCourses": ["a"],
+        "userId": "9863",
+        "email": "asmaa@gmail.com",
+        "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "username": "asmaa"
+    },
+    {
+        "role": "Student",
+        "enrolledCourses": [],
+        "progress": {},
+        "userId": "9720",
+        "email": "aseel@gmail.com",
+        "passwordHash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "username": "aseel"
+    }
+]
