@@ -10,7 +10,6 @@ package com.mycompany.labb7;
  */
 import org.json.JSONArray;
 import org.json.JSONObject;
-import model.*;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
