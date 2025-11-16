@@ -19,11 +19,29 @@ public class Instructor1 extends javax.swing.JFrame {
     public Instructor1(User u) {
         initComponents();
         this.cu=u;
+        loadInstructorCourses();
     }
      
     public Instructor1() {
                 initComponents();
 
+    }
+    
+    private void loadInstructorCourses(){
+    try{
+      courseComboBox.removeAllItems();
+      
+      for(Course c: JsonDataBaseManager.getAllCourses())
+      {
+       if(c.getInstructorId().equals(cu.getUserId()))
+       {courseComboBox.addItem(c.getTitle());
+       }
+      }
+    }
+    catch(Exception e){
+     
+    }
+    
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,7 +60,11 @@ public class Instructor1 extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        courseComboBox = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        studentsTable = new javax.swing.JTable();
+        loadBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,6 +78,8 @@ public class Instructor1 extends javax.swing.JFrame {
         });
 
         jLabel2.setText("description");
+
+        jTextField2.setText("jTextField2");
 
         jButton2.setText("Create");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +105,7 @@ public class Instructor1 extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGap(18, 18, 18)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,7 +120,7 @@ public class Instructor1 extends javax.swing.JFrame {
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Create", jPanel1);
@@ -105,15 +129,71 @@ public class Instructor1 extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 465, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 202, Short.MAX_VALUE)
+            .addGap(0, 309, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("tab2", jPanel2);
-        jTabbedPane1.addTab("view", jTabbedPane2);
+
+        courseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        courseComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                courseComboBoxActionPerformed(evt);
+            }
+        });
+
+        studentsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(studentsTable);
+
+        loadBtn.setText("jButton3");
+        loadBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(courseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(163, 163, 163)
+                        .addComponent(loadBtn)))
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(courseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(loadBtn))
+        );
+
+        jTabbedPane1.addTab("view", jPanel3);
 
         jButton1.setText("log out");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -126,17 +206,21 @@ public class Instructor1 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGap(158, 158, 158)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jTabbedPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(28, 28, 28))
         );
@@ -153,37 +237,69 @@ public class Instructor1 extends javax.swing.JFrame {
         this.dispose();  
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try{
             String title =jTextField1.getText();
             String description = jTextField2.getText();
-            
+
             if(title.isEmpty())
             {JOptionPane.showMessageDialog(this,"please enter a valid course title");
-            return;
+                return;
             }
             if(description.isEmpty())
             {JOptionPane.showMessageDialog(this,"please enter a valid course description");
-            return;
+                return;
             }
-          JsonDataBaseManager db= new JsonDataBaseManager();
-           Course newcourse=new Course(title,description,cu.getUserId());
-           db.addCourse(newcourse);
-           
-           JOptionPane.showMessageDialog(this,"Course creted succeffully");
-            
+            JsonDataBaseManager db= new JsonDataBaseManager();
+            Course newcourse=new Course(title,description,cu.getUserId());
+            db.addCourse(newcourse);
+
+            JOptionPane.showMessageDialog(this,"Course creted succeffully");
+
         }
         catch(Exception ex){
             JOptionPane.showMessageDialog(this,"error");
+
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void courseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseComboBoxActionPerformed
+        // TODO add your handling code here:
         
+    }//GEN-LAST:event_courseComboBoxActionPerformed
+
+    private void loadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadBtnActionPerformed
+        // TODO add your handling code here:
+        try{
+          String selectedcourse= (String) courseComboBox.getSelectedItem();
+          if(selectedcourse==null)
+          {
+           JOptionPane.showMessageDialog(this, "No course selected");
+           return;
+          }
+        
+        Course target =null;
+        for(Course c: JsonDataBaseManager.getAllCourses()){
+        if(c.getTitle().equals(selectedcourse)&&c.getInstructorId().equals(cu.getUserId()))
+        {
+            target =c;
+            break;
+        }
         }
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if(target==null)
+            JOptionPane.showMessageDialog(this, "Course not found");
+        return;
+        }
+        catch(Exception e){
+                JOptionPane.showMessageDialog(this, "ERROR");
+                }
+    }//GEN-LAST:event_loadBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,15 +337,19 @@ public class Instructor1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> courseComboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton loadBtn;
+    private javax.swing.JTable studentsTable;
     // End of variables declaration//GEN-END:variables
 }
