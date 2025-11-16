@@ -108,7 +108,9 @@ public class JsonDataBaseManager {
     // Find ANY instructor and add the course TITLE
     for (int i = 0; i < users.length(); i++) {
         JSONObject user = users.getJSONObject(i);
-        if (user.getString("role").equals("Instructor")) {
+        //if (user.getString("role").equals("Instructor")) 
+        if (user.getString("userId").equals(instructorId))
+        {
             System.out.println("DEBUG: Found an instructor - ID: " + user.getString("userId"));
             
             JSONArray createdCourses;

@@ -80,6 +80,11 @@ public class Instructor1 extends javax.swing.JFrame {
         jLabel2.setText("description");
 
         jTextField2.setText("jTextField2");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Create");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -259,8 +264,8 @@ public class Instructor1 extends javax.swing.JFrame {
 
         }
         catch(Exception ex){
-            JOptionPane.showMessageDialog(this,"error");
-
+JOptionPane.showMessageDialog(this,"Error: " + ex.getMessage());
+    ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -300,6 +305,10 @@ public class Instructor1 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "ERROR");
                 }
     }//GEN-LAST:event_loadBtnActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
