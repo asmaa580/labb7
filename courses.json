@@ -4,15 +4,20 @@
         "students": [],
         "title": "a",
         "courseId": "4981",
-        "instructorId": "9863",
-        "lessons": []
+        "instructorId": "9863"
     },
     {
         "description": "b",
         "students": [],
         "title": "b",
         "courseId": "2661",
-        "instructorId": "3646",
-        "lessons": []
+        "instructorId": "3646"
+    },
+    {
+        "description": "c",
+        "students": ["9329"],
+        "title": "c",
+        "courseId": "2955",
+        "instructorId": "7746"
     }
 ]

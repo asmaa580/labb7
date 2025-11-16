@@ -144,24 +144,47 @@ private static String getCourseTitleById(String courseId) throws IOException {
     return null; // Course not found
 } 
 
+
     public static ArrayList<Course> getAllCourses() throws IOException {
-    JSONArray coursesArray = loadJson(COURSES_FILE);
-    ArrayList<Course> courses = new ArrayList<>(); // Always return a list, never null
-    
-    if (coursesArray.length() == 0) {
-        System.out.println("DEBUG: No courses found in JSON file");
-        return courses; // Return empty list instead of null
-    }
-    
-    // ... rest of your existing code
-    for (int i = 0; i < coursesArray.length(); i++) {
-        JSONObject obj = coursesArray.getJSONObject(i);
-        // ... your existing parsing code
-    }
-    
-    System.out.println("DEBUG: Loaded " + courses.size() + " courses from JSON");
-    return courses;
+        JSONArray coursesArray = loadJson(COURSES_FILE);
+        if (coursesArray.length() == 0) 
+        return null;
+        ArrayList<Course> courses = new ArrayList<>();
+
+        for (int i = 0; i < coursesArray.length(); i++) {
+            JSONObject obj = coursesArray.getJSONObject(i);
+
+             JSONArray studentsArray = obj.getJSONArray("students");
+ArrayList<String> students = new ArrayList<>();
+for (int j = 0; j < studentsArray.length(); j++) {
+    students.add(studentsArray.getString(j));
 }
+
+JSONArray lessonsArray = obj.getJSONArray("lessons");
+ArrayList<Lesson> lessons = new ArrayList<>();  // Fixed: Lesson not Lessons
+for (int j = 0; j < lessonsArray.length(); j++) {
+    JSONObject lessonObj = lessonsArray.getJSONObject(j);  // Get JSON object, not string
+
+    Lesson lesson = new Lesson(
+        lessonObj.getString("lessonId"),
+        lessonObj.getString("title"), 
+        lessonObj.getString("content")
+    );
+    lessons.add(lesson);
+}
+
+Course course = new Course(
+    obj.getString("courseId"),
+    obj.getString("title"), 
+    obj.getString("description"), 
+    obj.getString("instructorId"),
+    students,
+    lessons
+);
+courses.add(course);
+        }
+        return courses;
+    }
     public static ArrayList<User> getStudentsForCourse(String courseId) throws IOException {
 
     ArrayList<User> result = new ArrayList<>();
