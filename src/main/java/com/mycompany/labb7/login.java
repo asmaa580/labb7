@@ -189,7 +189,7 @@ try
     else if(s.equals("Instructor")&&u.equals("instructor"))
     {
         JOptionPane.showMessageDialog(this,"Login Successful");
-         Instructor1 instructorFrame = new Instructor1();
+         Instructor1 instructorFrame = new Instructor1(db.authenticate(email,passwordHash.hashPassword(password)));
           instructorFrame.setVisible(true);
 
 

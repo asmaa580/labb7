@@ -88,7 +88,59 @@ public class JsonDataBaseManager {
         obj.put("students", new JSONArray());
         courses.put(obj);
         saveJson(COURSES_FILE, courses);
+        updateInstructorCourses(course.getInstructorId(), course.getCourseId());
     }
+   private static void updateInstructorCourses(String instructorId, String courseId) throws IOException {
+    JSONArray users = loadJson(USERS_FILE);
+    
+    System.out.println("DEBUG: Trying to update instructor courses for ID: " + instructorId);
+    
+    // First, get the course title from courses.json
+    String courseTitle = getCourseTitleById(courseId);
+    
+    if (courseTitle == null) {
+        System.out.println("DEBUG: ERROR - Could not find course title for ID: " + courseId);
+        return;
+    }
+    
+    System.out.println("DEBUG: Found course title: " + courseTitle);
+    
+    // Find ANY instructor and add the course TITLE
+    for (int i = 0; i < users.length(); i++) {
+        JSONObject user = users.getJSONObject(i);
+        if (user.getString("role").equals("Instructor")) {
+            System.out.println("DEBUG: Found an instructor - ID: " + user.getString("userId"));
+            
+            JSONArray createdCourses;
+            if (user.has("createdCourses")) {
+                createdCourses = user.getJSONArray("createdCourses");
+            } else {
+                createdCourses = new JSONArray();
+            }
+            
+            // Add the course TITLE instead of ID
+            createdCourses.put(courseTitle);
+            user.put("createdCourses", createdCourses);
+            System.out.println("DEBUG: Added course TITLE to instructor: " + user.getString("email"));
+            break; // Stop after first instructor found
+        }
+    }
+    
+    saveJson(USERS_FILE, users);
+}
+
+// ADD THIS NEW METHOD to get course title by ID
+private static String getCourseTitleById(String courseId) throws IOException {
+    JSONArray courses = loadJson(COURSES_FILE);
+    
+    for (int i = 0; i < courses.length(); i++) {
+        JSONObject course = courses.getJSONObject(i);
+        if (course.getString("courseId").equals(courseId)) {
+            return course.getString("title");
+        }
+    }
+    return null; // Course not found
+} 
 
     public static ArrayList<Course> getAllCourses() throws IOException {
         JSONArray coursesArray = loadJson(COURSES_FILE);

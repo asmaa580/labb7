@@ -157,7 +157,7 @@ else if(u.equalsIgnoreCase("instructor"))
         Instructorr s=new Instructorr(jTextField1.getText(),jTextField2.getText(), hash.hashPassword(jTextField4.getText()));
         db.addUser(s);
         
-        Instructor1 instructorFrame = new Instructor1();
+        Instructor1 instructorFrame = new Instructor1(s);
         instructorFrame.setVisible(true);
         this.dispose();  
         

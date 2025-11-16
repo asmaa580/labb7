@@ -16,7 +16,13 @@
     },
     {
         "role": "Instructor",
-        "createdCourses": ["C001"],
+        "createdCourses": [
+            "C001",
+            "6ce974ea-8e26-4283-be60-17f595892d92",
+            "379f3245-3fe5-4ba8-9521-fe0b228f6947",
+            "e",
+            "k"
+        ],
         "userId": "U002",
         "email": "ahmed@example.com",
         "passwordHash": "28bd7fe55a...",
