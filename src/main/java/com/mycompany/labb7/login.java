@@ -4,6 +4,12 @@ import com.mycompany.labb7.Student;
 import com.mycompany.labb7.Instructor1;
 import com.mycompany.labb7.SignUp1;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.ArrayList;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -122,9 +128,26 @@ public class login extends javax.swing.JFrame {
 boolean flag=false;
 //for(sign record:p.viewsign())
 //{//if(jTextField1.getText().equals(record.getUsername())&&jTextField2.getText().equals(record.getPassword()))
-  if(jTextField1.getText().equals("m")&&jTextField2.getText().equals("1")) {
+
+try{
+    String email= jTextField1.getText();
+String password= jTextField2.getText();
+JsonDataBaseManager db=new JsonDataBaseManager();
+JSONArray users=db.loadJson("Users.json");
+SecurityHashing passwordHash=new SecurityHashing();
+
+for (int i = 0; i < users.length(); i++) {
+    JSONObject user = users.getJSONObject(i);
+    String password1 = user.getString("passwordHash");
+    if(password1.equals(passwordHash.hashPassword(password)));
+  
+}
+
+    String s=db.authenticate(email,passwordHash.hashPassword(password)).getRole();
+  if(s!=null) 
+  {
     JOptionPane.showMessageDialog(this,"Login Successful");
-    if(u.equalsIgnoreCase("student")) {
+   
        
         Student studentFrame = new Student();
         studentFrame.setVisible(true);
@@ -143,8 +166,10 @@ else if(u.equalsIgnoreCase("instructor"))
         this.dispose();  
         flag = true;
 }
-  }
-else {JOptionPane.showMessageDialog(this,"Invalid Username or Password");
+}
+catch(Exception e)
+{
+JOptionPane.showMessageDialog(this,"Invalid Username or Password");
 }
        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed

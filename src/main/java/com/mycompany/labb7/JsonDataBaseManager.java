@@ -18,7 +18,7 @@ public class JsonDataBaseManager {
     private static final String USERS_FILE = "users.json";
     private static final String COURSES_FILE = "courses.json";
 
-    private static JSONArray loadJson(String file) throws IOException {
+    public static JSONArray loadJson(String file) throws IOException {
         Path path = Paths.get(file);
 
         
