@@ -17,6 +17,13 @@ public class Lesson {
     private String content;
     private ArrayList<String> resources;
 
+    public Lesson(String lessonId,String title, String content) {
+        this.lessonId =lessonId;
+        this.title = title;
+        this.content = content;
+        this.resources = new ArrayList<>();
+    }
+    
     public Lesson(String title, String content) {
         this.lessonId = UUID.randomUUID().toString();
         this.title = title;

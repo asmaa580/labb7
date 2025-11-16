@@ -95,10 +95,38 @@ public class JsonDataBaseManager {
         if (coursesArray.length() == 0) 
         return null;
         ArrayList<Course> courses = new ArrayList<>();
+        
         for (int i = 0; i < coursesArray.length(); i++) {
             JSONObject obj = coursesArray.getJSONObject(i);
-            Course course = new Course(obj.getString("courseId"),obj.getString("title"), obj.getString("description"), obj.getString("instructorId"));
-            courses.add(course);
+            
+             JSONArray studentsArray = obj.getJSONArray("students");
+ArrayList<String> students = new ArrayList<>();
+for (int j = 0; j < studentsArray.length(); j++) {
+    students.add(studentsArray.getString(j));
+}
+
+JSONArray lessonsArray = obj.getJSONArray("lessons");
+ArrayList<Lesson> lessons = new ArrayList<>();  // Fixed: Lesson not Lessons
+for (int j = 0; j < lessonsArray.length(); j++) {
+    JSONObject lessonObj = lessonsArray.getJSONObject(j);  // Get JSON object, not string
+    
+    Lesson lesson = new Lesson(
+        lessonObj.getString("lessonId"),
+        lessonObj.getString("title"), 
+        lessonObj.getString("content")
+    );
+    lessons.add(lesson);
+}
+
+Course course = new Course(
+    obj.getString("courseId"),
+    obj.getString("title"), 
+    obj.getString("description"), 
+    obj.getString("instructorId"),
+    students,
+    lessons
+);
+courses.add(course);
         }
         return courses;
     }
