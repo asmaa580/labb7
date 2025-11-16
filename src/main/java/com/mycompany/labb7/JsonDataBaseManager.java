@@ -108,7 +108,9 @@ public class JsonDataBaseManager {
     // Find ANY instructor and add the course TITLE
     for (int i = 0; i < users.length(); i++) {
         JSONObject user = users.getJSONObject(i);
-        if (user.getString("role").equals("Instructor")) {
+        //if (user.getString("role").equals("Instructor")) 
+        if (user.getString("userId").equals(instructorId))
+        {
             System.out.println("DEBUG: Found an instructor - ID: " + user.getString("userId"));
             
             JSONArray createdCourses;
@@ -143,44 +145,62 @@ private static String getCourseTitleById(String courseId) throws IOException {
 } 
 
     public static ArrayList<Course> getAllCourses() throws IOException {
-        JSONArray coursesArray = loadJson(COURSES_FILE);
-        if (coursesArray.length() == 0) 
-        return null;
-        ArrayList<Course> courses = new ArrayList<>();
-        
-        for (int i = 0; i < coursesArray.length(); i++) {
-            JSONObject obj = coursesArray.getJSONObject(i);
-            
-             JSONArray studentsArray = obj.getJSONArray("students");
-ArrayList<String> students = new ArrayList<>();
-for (int j = 0; j < studentsArray.length(); j++) {
-    students.add(studentsArray.getString(j));
-}
-
-JSONArray lessonsArray = obj.getJSONArray("lessons");
-ArrayList<Lesson> lessons = new ArrayList<>();  // Fixed: Lesson not Lessons
-for (int j = 0; j < lessonsArray.length(); j++) {
-    JSONObject lessonObj = lessonsArray.getJSONObject(j);  // Get JSON object, not string
+    JSONArray coursesArray = loadJson(COURSES_FILE);
+    ArrayList<Course> courses = new ArrayList<>(); // Always return a list, never null
     
-    Lesson lesson = new Lesson(
-        lessonObj.getString("lessonId"),
-        lessonObj.getString("title"), 
-        lessonObj.getString("content")
-    );
-    lessons.add(lesson);
-}
-
-Course course = new Course(
-    obj.getString("courseId"),
-    obj.getString("title"), 
-    obj.getString("description"), 
-    obj.getString("instructorId"),
-    students,
-    lessons
-);
-courses.add(course);
-        }
-        return courses;
+    if (coursesArray.length() == 0) {
+        System.out.println("DEBUG: No courses found in JSON file");
+        return courses; // Return empty list instead of null
     }
     
+    // ... rest of your existing code
+    for (int i = 0; i < coursesArray.length(); i++) {
+        JSONObject obj = coursesArray.getJSONObject(i);
+        // ... your existing parsing code
+    }
+    
+    System.out.println("DEBUG: Loaded " + courses.size() + " courses from JSON");
+    return courses;
+}
+    public static ArrayList<User> getStudentsForCourse(String courseId) throws IOException {
+
+    ArrayList<User> result = new ArrayList<>();
+
+    JSONArray courses = loadJson(COURSES_FILE);
+    JSONArray users = loadJson(USERS_FILE);
+
+    // find the course by ID
+    JSONObject targetCourse = null;
+    for (int i = 0; i < courses.length(); i++) {
+        JSONObject c = courses.getJSONObject(i);
+        if (c.getString("courseId").equals(courseId)) {
+            targetCourse = c;
+            break;
+        }
+    }
+
+    if (targetCourse == null) {
+        return result; // no such course
+    }
+
+    // extract student IDs
+    JSONArray studentIds = targetCourse.getJSONArray("students");
+
+    // match each student ID with a user in users.json
+    for (int i = 0; i < users.length(); i++) {
+        JSONObject u = users.getJSONObject(i);
+
+        if (studentIds.toList().contains(u.getString("userId"))) {
+
+            result.add(new Studentt(
+                u.getString("username"),
+                u.getString("email"),
+                u.getString("passwordHash")
+            ));
+        }
+    }
+
+    return result;
+}
+
 }
