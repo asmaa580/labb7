@@ -1,5 +1,9 @@
 package com.mycompany.labb7;
 import javax.swing.JOptionPane;
+import com.mycompany.labb7.Student;
+import com.mycompany.labb7.Instructor1;
+import com.mycompany.labb7.SignUp;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -118,26 +122,28 @@ public class login extends javax.swing.JFrame {
 boolean flag=false;
 //for(sign record:p.viewsign())
 //{//if(jTextField1.getText().equals(record.getUsername())&&jTextField2.getText().equals(record.getPassword()))
-    if(jTextField1.getText().equals("m")&&jTextField2.getText().equals("1"))
-{
-JOptionPane.showMessageDialog(this,"Login Successful");
-if(u.equalsIgnoreCase("student"))
-{Student newwindow=new Student();
-this.setContentPane(newwindow);
-revalidate();
-repaint(); //like refresh to show changes after running
-flag=true;
-//break;
-}
+  if(jTextField1.getText().equals("m")&&jTextField2.getText().equals("1")) {
+    JOptionPane.showMessageDialog(this,"Login Successful");
+    if(u.equalsIgnoreCase("student")) {
+       
+        Student studentFrame = new Student();
+        studentFrame.setVisible(true);
+        
+        
+        this.dispose();  
+        flag = true;
+    }
+
 else if(u.equalsIgnoreCase("instructor"))
 {
-  Instructor newwindow=new Instructor();
-this.setContentPane(newwindow);
-revalidate();
-repaint(); //like refresh to show changes after running
-flag=true;
-//break;  
-}}
+   Instructor1 instructorFrame = new Instructor1();
+        instructorFrame.setVisible(true);
+        
+        
+        this.dispose();  
+        flag = true;
+}
+  }
 else {JOptionPane.showMessageDialog(this,"Invalid Username or Password");
 }
        // TODO add your handling code here:

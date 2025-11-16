@@ -12,7 +12,7 @@ import javax.swing.SwingUtilities;
  *
  * @author MALAK
  */
-public class SignUp extends javax.swing.JPanel {
+public class SignUp extends javax.swing.JFrame {
 
     /**
      * Creates new form SignUp
@@ -107,7 +107,7 @@ flag=true;
 }
 else if(u.equalsIgnoreCase("instructor"))
 {
-  Instructor instructorPanel = new Instructor();
+  Instructor1 instructorPanel = new Instructor1();
 JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 topFrame.setContentPane(instructorPanel);
 topFrame.revalidate();
