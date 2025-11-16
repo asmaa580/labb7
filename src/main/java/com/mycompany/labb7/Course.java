@@ -17,8 +17,8 @@ public class Course {
     private ArrayList<Lesson> lessons;
     private ArrayList<String> students;
 
-    public Course(String title, String description, String instructorId) {
-        this.courseId = UUID.randomUUID().toString();
+    public Course(String courseId,String title, String description, String instructorId) {
+        this.courseId = courseId;
         this.title = title;
         this.description = description;
         this.instructorId = instructorId;

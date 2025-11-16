@@ -97,7 +97,7 @@ public class JsonDataBaseManager {
         ArrayList<Course> courses = new ArrayList<>();
         for (int i = 0; i < coursesArray.length(); i++) {
             JSONObject obj = coursesArray.getJSONObject(i);
-            Course course = new Course(obj.getString("title"), obj.getString("description"), obj.getString("instructorId"));
+            Course course = new Course(obj.getString("courseId"),obj.getString("title"), obj.getString("description"), obj.getString("instructorId"));
             courses.add(course);
         }
         return courses;
