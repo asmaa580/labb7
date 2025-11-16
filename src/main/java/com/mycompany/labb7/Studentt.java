@@ -10,11 +10,11 @@ import java.util.HashMap;
  * @author aseel
  */
 
-public class student extends User {
+public class Studentt extends User {
     private ArrayList<String> enrolledCourses;
     private HashMap<String, ArrayList<String>> progress; // courseId -> list of completed lessonIds
 
-    public student(String username, String email, String passwordHash) {
+    public Studentt(String username, String email, String passwordHash) {
         super(username, email, passwordHash);
         enrolledCourses = new ArrayList<>();
         progress = new HashMap<>();

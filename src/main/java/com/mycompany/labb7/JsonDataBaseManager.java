@@ -53,7 +53,7 @@ public class JsonDataBaseManager {
         obj.put("email", user.getEmail());
         obj.put("passwordHash", user.getPasswordHash());
         obj.put("role", user.getRole());
-        if (user instanceof student) {
+        if (user instanceof Studentt) {
             obj.put("enrolledCourses", new JSONArray());
             obj.put("progress", new JSONObject());
         } else if (user instanceof Instructorr) {
@@ -68,7 +68,7 @@ public class JsonDataBaseManager {
         for (int i = 0; i < users.length(); i++) {
             JSONObject obj = users.getJSONObject(i);
             if (obj.getString("email").equals(email) && obj.getString("passwordHash").equals(passwordHash)) {
-                if (obj.getString("role").equals("Student")) return new student(obj.getString("username"), email, passwordHash);
+                if (obj.getString("role").equals("Student")) return new Studentt(obj.getString("username"), email, passwordHash);
                 else return new Instructorr(obj.getString("username"), email, passwordHash);
             }
         }
