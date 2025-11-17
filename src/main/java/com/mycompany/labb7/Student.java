@@ -22,7 +22,7 @@ public class Student extends javax.swing.JFrame {
     public Student() {
         try{JsonDataBaseManager dbm=new JsonDataBaseManager();
         ArrayList <Course> allCourses = new ArrayList<>();
-        allCourses=dbm.getAllCourses();
+        allCourses=dbm.getAllCourses1();
         initComponents();
         DefaultTableModel coursesModel = new DefaultTableModel();
         coursesModel.addColumn("Course ID");
@@ -63,6 +63,10 @@ JOptionPane.showMessageDialog(this,"No available courses");
         jTextField1 = new javax.swing.JTextField();
         idInput = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        studentsTable = new javax.swing.JTable();
+        jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -134,18 +138,56 @@ JOptionPane.showMessageDialog(this,"No available courses");
 
         jTabbedPane1.addTab("browse", jPanel1);
 
+        jLabel3.setText("student id:");
+
+        studentsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(studentsTable);
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("enroll", jPanel2);
+        jTabbedPane1.addTab("Enrolled courses", jPanel2);
 
         jButton1.setText("log out");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -158,11 +200,11 @@ JOptionPane.showMessageDialog(this,"No available courses");
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGap(145, 145, 145)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,94 +231,50 @@ JOptionPane.showMessageDialog(this,"No available courses");
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void enrollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollActionPerformed
+    private void idInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idInputActionPerformed
         // TODO add your handling code here:
-         DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
-    int selectedRow = jTable1.getSelectedRow();
-
-    if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this, "Please select a course to enroll.");
-        return;
-    }
-
-    Object courseId = tableModel.getValueAt(selectedRow, 0);
-
-    int confirm = JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to enroll course \"" + courseId +  ")?",
-            "Confirm enrollment",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE
-    );
-    
-     if (confirm == JOptionPane.YES_OPTION) {
-         try 
-         {
-         JsonDataBaseManager dbm=new JsonDataBaseManager();
-          ArrayList <Course> allCourses = new ArrayList<>(); 
-           ArrayList <Studentt> allStudents = new ArrayList<>(); 
-        allCourses=dbm.getAllCourses();
-        for (Course c : allCourses)
-        {
-            if( c.getCourseId().equals((String)courseId))
-            {
- c.enrollStudent(idInput.getText());
-               JSONArray studentsArray = new JSONArray();
-for (Studentt student : allStudents) {
-    JSONObject studentObj = new JSONObject();
-    studentObj.put("username", student.getUsername());
-    studentObj.put("email", student.getEmail());
-    studentObj.put("passwordHash", student.getPasswordHash());
-    studentObj.put("role", student.getRole());
-
-    // enrolledCourses as JSON array
-    studentObj.put("enrolledCourses", new JSONArray(student.getEnrolledCourses()));
-
-    // progress as JSON object: courseId -> list of completed lessonIds
-    JSONObject progressObj = new JSONObject();
-    for (Map.Entry<String, ArrayList<String>> entry : student.getProgress().entrySet()) {
-        progressObj.put(entry.getKey(), new JSONArray(entry.getValue()));
-    }
-    studentObj.put("progress", progressObj);
-
-    studentsArray.put(studentObj);
-}
-dbm.saveJson("students.json", studentsArray); 
-               
-
-           
-            
-            JSONArray coursesArray = new JSONArray();
-             for (Course course : allCourses) {
-                JSONObject courseObj = new JSONObject();
-                courseObj.put("courseId", course.getCourseId());
-                courseObj.put("title", course.getTitle());
-                courseObj.put("description", course.getDescription());
-                courseObj.put("instructorId", course.getInstructorId());
-                courseObj.put("students", course.getStudents());
-                courseObj.put("lessons", course.getLessons());
-                coursesArray.put(courseObj);
-            }
-            dbm.saveJson("courses.json", coursesArray);
-            }
-        }
-
-        JOptionPane.showMessageDialog(this, "course enrolled successfully.");
-         }
-         catch(Exception e){JOptionPane.showMessageDialog(this,"No available courses");}
-     }
-          else 
-        JOptionPane.showMessageDialog(this, "Deletion cancelled.");
-    
-    }//GEN-LAST:event_enrollActionPerformed
+    }//GEN-LAST:event_idInputActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void idInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idInputActionPerformed
+    private void enrollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_idInputActionPerformed
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a course to enroll.");
+            return;
+        }
+
+        Object courseId = tableModel.getValueAt(selectedRow, 0);
+
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to enroll course \"" + courseId +  ")?",
+            "Confirm enrollment",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                JsonDataBaseManager.enrollStudentInCourse(idInput.getText(),(String) courseId);
+                JOptionPane.showMessageDialog(this, "Course enrolled successfully.");
+            }
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Could not enroll: " + e.getMessage());
+            }}
+            else
+            JOptionPane.showMessageDialog(this, "enrollment cancelled.");
+
+    }//GEN-LAST:event_enrollActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,11 +315,15 @@ dbm.saveJson("students.json", studentsArray);
     private javax.swing.JButton enroll;
     private javax.swing.JTextField idInput;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable studentsTable;
     // End of variables declaration//GEN-END:variables
 }

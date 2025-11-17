@@ -1,54 +1,41 @@
 [
     {
-        "description": "a",
-        "students": [
-            "S001",
-            "S002",
-            "2757"
-        ],
-        "title": "a",
-        "courseId": "4981",
-        "instructorId": "9863",
-        "lessons": []
+        "description": "Learn the basics of Java",
+        "title": "Java Programming",
+        "courseId": "C001",
+        "instructorId": "U002",
+        "lessons": [
+            {
+                "lessonId": "L001",
+                "resources": [],
+                "title": "Introduction to Java",
+                "content": "Java is a programming language..."
+            },
+            {
+                "lessonId": "L002",
+                "resources": [],
+                "title": "Variables and Data Types",
+                "content": "Variables store data..."
+            }
+        ]
     },
     {
-        "description": "b",
-        "students": ["malak"],
-        "title": "b",
-        "courseId": "2661",
-        "instructorId": "3646",
-        "lessons": []
+        "description": "Learn Python from scratch",
+        "title": "Python Programming",
+        "courseId": "C002",
+        "instructorId": "U003",
+        "lessons": [{
+            "lessonId": "L003",
+            "resources": [],
+            "title": "Introduction to Python",
+            "content": "Python is a programming language..."
+        }]
     },
     {
-        "description": "aa",
-        "students": ["asmaa"],
-        "title": "aa",
-        "courseId": "8066",
-        "instructorId": "7808",
-        "lessons": []
-    },
-    {
-        "description": "z",
-        "students": [],
-        "title": "z",
-        "courseId": "7594",
-        "instructorId": "7814",
-        "lessons": []
-    },
-    {
-        "description": "xxx",
-        "students": [],
-        "title": "xx",
-        "courseId": "643",
-        "instructorId": "3052",
-        "lessons": []
-    },
-    {
-        "description": "jTextFqqield2",
-        "students": [],
-        "title": "qq",
-        "courseId": "527",
-        "instructorId": "7347",
+        "description": "learn science",
+        "title": "science",
+        "courseId": "7888",
+        "instructorId": "8784",
         "lessons": []
     }
 ]

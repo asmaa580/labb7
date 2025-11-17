@@ -10,7 +10,10 @@
     },
     {
         "role": "Student",
-        "enrolledCourses": [],
+        "enrolledCourses": [
+            "C001",
+            "C002"
+        ],
         "progress": {},
         "userId": "9612",
         "email": "aseel@gmail.com",

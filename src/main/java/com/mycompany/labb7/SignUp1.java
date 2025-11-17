@@ -136,6 +136,30 @@ public class SignUp1 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
+            if(jTextField1.getText().isEmpty())
+    { 
+        JOptionPane.showMessageDialog(this,"Empty name text field.Re-enter name.");
+        return;
+    }
+            
+              if(jTextField2.getText().isEmpty())
+    { 
+        JOptionPane.showMessageDialog(this,"Empty email text field.Re-enter email.");
+        return;
+    }
+              
+       if(jTextField4.getText().isEmpty())
+    { 
+        JOptionPane.showMessageDialog(this,"Empty password text field.Re-enter passwors.");
+        return;
+    }       
+       
+       if (!jTextField2.getText().contains("@"))
+       {
+           JOptionPane.showMessageDialog(this,"This email is unvalid . make sure to add @");
+        return;
+       }
+            
         
         String u= jComboBox1.getSelectedItem().toString();
          JsonDataBaseManager db=new JsonDataBaseManager();

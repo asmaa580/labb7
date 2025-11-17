@@ -170,6 +170,12 @@ try
         JOptionPane.showMessageDialog(this,"Empty password text field.Re-enter Password.");
         return;
     }
+    
+     if (!email.contains("@"))
+       {
+           JOptionPane.showMessageDialog(this,"This email is unvalid . make sure to add @");
+        return;
+       }
 
 
         JsonDataBaseManager db=new JsonDataBaseManager();

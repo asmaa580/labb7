@@ -14,6 +14,8 @@ com\mycompany\labb7\SignUp1.class
 com\mycompany\labb7\Student$1.class
 com\mycompany\labb7\login.class
 com\mycompany\labb7\SignUp1$2.class
+com\mycompany\labb7\Instructor1$9.class
+com\mycompany\labb7\Student$6.class
 com\mycompany\labb7\login$3.class
 com\mycompany\labb7\SignUp1$3.class
 com\mycompany\labb7\Student.class
@@ -22,7 +24,9 @@ com\mycompany\labb7\SecurityHashing.class
 com\mycompany\labb7\JsonDataBaseManager.class
 com\mycompany\labb7\SignUp1$5.class
 com\mycompany\labb7\login$5.class
+com\mycompany\labb7\Instructor1$10.class
 com\mycompany\labb7\Student$4.class
+com\mycompany\labb7\Instructor1$8.class
 com\mycompany\labb7\SignUp1$1.class
 com\mycompany\labb7\Student$5.class
 com\mycompany\labb7\User.class
