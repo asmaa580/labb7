@@ -144,8 +144,7 @@ private static String getCourseTitleById(String courseId) throws IOException {
     return null; // Course not found
 } 
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 public static ArrayList<Course> getAllCourses1() throws IOException {
     JSONArray coursesArray = loadJson(COURSES_FILE);
     if (coursesArray.length() == 0) 
@@ -191,19 +190,10 @@ public static ArrayList<Course> getAllCourses1() throws IOException {
     return courses;
 }
 
-    public static ArrayList<Course> getAllCourses() throws IOException {
-        JSONArray coursesArray = loadJson(COURSES_FILE);
-        if (coursesArray.length() == 0) 
-=======
+
 public static ArrayList<Course> getAllCourses() throws IOException {
     JSONArray coursesArray = loadJson(COURSES_FILE);
     if (coursesArray.length() == 0) 
->>>>>>> Stashed changes
-=======
-public static ArrayList<Course> getAllCourses() throws IOException {
-    JSONArray coursesArray = loadJson(COURSES_FILE);
-    if (coursesArray.length() == 0) 
->>>>>>> Stashed changes
         return null;
 
     ArrayList<Course> courses = new ArrayList<>();
@@ -242,15 +232,7 @@ public static ArrayList<Course> getAllCourses() throws IOException {
         );
         courses.add(course);
     }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    
-    
-    
-    
-=======
-=======
->>>>>>> Stashed changes
+
 
     return courses;
 }
@@ -299,10 +281,7 @@ public static ArrayList<Course> getAllCourses() throws IOException {
 
 
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
     public static ArrayList<User> getStudentsForCourse(String courseId) throws IOException {
 
     ArrayList<User> result = new ArrayList<>();

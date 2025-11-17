@@ -2,19 +2,9 @@
     {
         "description": "a",
         "students": [
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
             "S001",
             "S002",
             "2757"
-=======
-            "3213",
-            "9612"
->>>>>>> Stashed changes
-=======
-            "3213",
-            "9612"
->>>>>>> Stashed changes
         ],
         "title": "a",
         "courseId": "4981",
@@ -23,62 +13,42 @@
     },
     {
         "description": "b",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         "students": ["malak"],
-=======
-        "students": ["5403"],
->>>>>>> Stashed changes
-=======
-        "students": ["5403"],
->>>>>>> Stashed changes
         "title": "b",
         "courseId": "2661",
         "instructorId": "3646",
         "lessons": []
     },
     {
-<<<<<<< Updated upstream
         "description": "aa",
         "students": ["asmaa"],
         "title": "aa",
         "courseId": "8066",
-        "instructorId": "7808"
+        "instructorId": "7808",
+        "lessons": []
     },
     {
         "description": "z",
         "students": [],
         "title": "z",
         "courseId": "7594",
-        "instructorId": "7814"
+        "instructorId": "7814",
+        "lessons": []
     },
     {
         "description": "xxx",
         "students": [],
         "title": "xx",
         "courseId": "643",
-        "instructorId": "3052"
-=======
-        "description": "c",
-        "students": [
-            "9329",
-            "2065"
-        ],
-        "title": "c",
-        "courseId": "2955",
-        "instructorId": "7746",
+        "instructorId": "3052",
         "lessons": []
     },
     {
-        "description": "d",
-        "students": ["2065"],
-        "title": "d",
-        "courseId": "1116",
-        "instructorId": "9358",
+        "description": "jTextFqqield2",
+        "students": [],
+        "title": "qq",
+        "courseId": "527",
+        "instructorId": "7347",
         "lessons": []
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
 ]
