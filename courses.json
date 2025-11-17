@@ -3,9 +3,14 @@
         "description": "a",
         "students": [
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             "S001",
             "S002",
             "2757"
+=======
+            "3213",
+            "9612"
+>>>>>>> Stashed changes
 =======
             "3213",
             "9612"
@@ -19,7 +24,11 @@
     {
         "description": "b",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "students": ["malak"],
+=======
+        "students": ["5403"],
+>>>>>>> Stashed changes
 =======
         "students": ["5403"],
 >>>>>>> Stashed changes
@@ -67,6 +76,9 @@
         "courseId": "1116",
         "instructorId": "9358",
         "lessons": []
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
 ]
