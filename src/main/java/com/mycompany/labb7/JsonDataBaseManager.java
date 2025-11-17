@@ -144,6 +144,7 @@ private static String getCourseTitleById(String courseId) throws IOException {
     return null; // Course not found
 } 
 
+<<<<<<< Updated upstream
 public static ArrayList<Course> getAllCourses1() throws IOException {
     JSONArray coursesArray = loadJson(COURSES_FILE);
     if (coursesArray.length() == 0) 
@@ -192,47 +193,104 @@ public static ArrayList<Course> getAllCourses1() throws IOException {
     public static ArrayList<Course> getAllCourses() throws IOException {
         JSONArray coursesArray = loadJson(COURSES_FILE);
         if (coursesArray.length() == 0) 
+=======
+public static ArrayList<Course> getAllCourses() throws IOException {
+    JSONArray coursesArray = loadJson(COURSES_FILE);
+    if (coursesArray.length() == 0) 
+>>>>>>> Stashed changes
         return null;
-        ArrayList<Course> courses = new ArrayList<>();
 
-        for (int i = 0; i < coursesArray.length(); i++) {
-            JSONObject obj = coursesArray.getJSONObject(i);
+    ArrayList<Course> courses = new ArrayList<>();
 
-             JSONArray studentsArray = obj.getJSONArray("students");
-ArrayList<String> students = new ArrayList<>();
-for (int j = 0; j < studentsArray.length(); j++) {
-    students.add(studentsArray.getString(j));
-}
+    for (int i = 0; i < coursesArray.length(); i++) {
+        JSONObject obj = coursesArray.getJSONObject(i);
 
-JSONArray lessonsArray = obj.getJSONArray("lessons");
-ArrayList<Lesson> lessons = new ArrayList<>();  // Fixed: Lesson not Lessons
-for (int j = 0; j < lessonsArray.length(); j++) {
-    JSONObject lessonObj = lessonsArray.getJSONObject(j);  // Get JSON object, not string
-
-    Lesson lesson = new Lesson(
-        lessonObj.getString("lessonId"),
-        lessonObj.getString("title"), 
-        lessonObj.getString("content")
-    );
-    lessons.add(lesson);
-}
-
-Course course = new Course(
-    obj.getString("courseId"),
-    obj.getString("title"), 
-    obj.getString("description"), 
-    obj.getString("instructorId"),
-    students,
-    lessons
-);
-courses.add(course);
+        // Students
+        JSONArray studentsArray = obj.has("students") ? obj.getJSONArray("students") : new JSONArray();
+        ArrayList<String> students = new ArrayList<>();
+        for (int j = 0; j < studentsArray.length(); j++) {
+            students.add(studentsArray.getString(j));
         }
-        return courses;
+
+        // Lessons
+        JSONArray lessonsArray = obj.has("lessons") ? obj.getJSONArray("lessons") : new JSONArray();
+        ArrayList<Lesson> lessons = new ArrayList<>();
+        for (int j = 0; j < lessonsArray.length(); j++) {
+            JSONObject lessonObj = lessonsArray.getJSONObject(j);
+            Lesson lesson = new Lesson(
+                lessonObj.getString("lessonId"),
+                lessonObj.getString("title"), 
+                lessonObj.getString("content")
+            );
+            lessons.add(lesson);
+        }
+
+        // Course object
+        Course course = new Course(
+            obj.getString("courseId"),
+            obj.getString("title"), 
+            obj.getString("description"), 
+            obj.getString("instructorId"),
+            students,
+            lessons
+        );
+        courses.add(course);
     }
+<<<<<<< Updated upstream
     
     
     
     
+=======
+
+    return courses;
+}
+    
+ public static ArrayList<Studentt> getAllStudents() throws IOException {
+    JSONArray studentsArray = loadJson("students.json");
+    if (studentsArray.length() == 0)
+        return null;
+
+    ArrayList<Studentt> students = new ArrayList<>();
+
+    for (int i = 0; i < studentsArray.length(); i++) {
+        JSONObject obj = studentsArray.getJSONObject(i);
+
+        // Basic fields
+        Studentt student = new Studentt(
+            obj.getString("username"),
+            obj.getString("email"),
+            obj.getString("passwordHash")
+        );
+
+        // Enrolled courses
+        JSONArray enrolledCoursesArray = obj.optJSONArray("enrolledCourses");
+        if (enrolledCoursesArray != null) {
+            for (int j = 0; j < enrolledCoursesArray.length(); j++) {
+                student.enrollCourse(enrolledCoursesArray.getString(j));
+            }
+        }
+
+        // Progress
+        JSONObject progressObj = obj.optJSONObject("progress");
+        if (progressObj != null) {
+            for (String courseId : progressObj.keySet()) {
+                JSONArray lessonsArray = progressObj.getJSONArray(courseId);
+                for (int k = 0; k < lessonsArray.length(); k++) {
+                    student.completeLesson(courseId, lessonsArray.getString(k));
+                }
+            }
+        }
+
+        students.add(student);
+    }
+
+    return students;
+}
+
+
+
+>>>>>>> Stashed changes
     public static ArrayList<User> getStudentsForCourse(String courseId) throws IOException {
 
     ArrayList<User> result = new ArrayList<>();

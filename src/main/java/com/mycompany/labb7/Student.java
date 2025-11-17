@@ -5,6 +5,7 @@
 package com.mycompany.labb7;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,7 +38,8 @@ public class Student extends javax.swing.JFrame {
             c.getLessons().size()
     });
 }
-        }catch(Exception e)
+        }
+        catch(Exception e)
 {
 JOptionPane.showMessageDialog(this,"No available courses");
 }
@@ -211,15 +213,39 @@ JOptionPane.showMessageDialog(this,"No available courses");
          try 
          {
          JsonDataBaseManager dbm=new JsonDataBaseManager();
-          ArrayList <Course> allCourses = new ArrayList<>();
+          ArrayList <Course> allCourses = new ArrayList<>(); 
+           ArrayList <Studentt> allStudents = new ArrayList<>(); 
         allCourses=dbm.getAllCourses();
         for (Course c : allCourses)
         {
             if( c.getCourseId().equals((String)courseId))
             {
-                c.enrollStudent(idInput.getText());
-               JSONArray usersArray = new JSONArray();
-            dbm.saveJson("users.json", usersArray);
+ c.enrollStudent(idInput.getText());
+               JSONArray studentsArray = new JSONArray();
+for (Studentt student : allStudents) {
+    JSONObject studentObj = new JSONObject();
+    studentObj.put("username", student.getUsername());
+    studentObj.put("email", student.getEmail());
+    studentObj.put("passwordHash", student.getPasswordHash());
+    studentObj.put("role", student.getRole());
+
+    // enrolledCourses as JSON array
+    studentObj.put("enrolledCourses", new JSONArray(student.getEnrolledCourses()));
+
+    // progress as JSON object: courseId -> list of completed lessonIds
+    JSONObject progressObj = new JSONObject();
+    for (Map.Entry<String, ArrayList<String>> entry : student.getProgress().entrySet()) {
+        progressObj.put(entry.getKey(), new JSONArray(entry.getValue()));
+    }
+    studentObj.put("progress", progressObj);
+
+    studentsArray.put(studentObj);
+}
+dbm.saveJson("students.json", studentsArray); 
+               
+
+           
+            
             JSONArray coursesArray = new JSONArray();
              for (Course course : allCourses) {
                 JSONObject courseObj = new JSONObject();
@@ -228,6 +254,7 @@ JOptionPane.showMessageDialog(this,"No available courses");
                 courseObj.put("description", course.getDescription());
                 courseObj.put("instructorId", course.getInstructorId());
                 courseObj.put("students", course.getStudents());
+                courseObj.put("lessons", course.getLessons());
                 coursesArray.put(courseObj);
             }
             dbm.saveJson("courses.json", coursesArray);

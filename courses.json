@@ -2,22 +2,34 @@
     {
         "description": "a",
         "students": [
+<<<<<<< Updated upstream
             "S001",
             "S002",
             "2757"
+=======
+            "3213",
+            "9612"
+>>>>>>> Stashed changes
         ],
         "title": "a",
         "courseId": "4981",
-        "instructorId": "9863"
+        "instructorId": "9863",
+        "lessons": []
     },
     {
         "description": "b",
+<<<<<<< Updated upstream
         "students": ["malak"],
+=======
+        "students": ["5403"],
+>>>>>>> Stashed changes
         "title": "b",
         "courseId": "2661",
-        "instructorId": "3646"
+        "instructorId": "3646",
+        "lessons": []
     },
     {
+<<<<<<< Updated upstream
         "description": "aa",
         "students": ["asmaa"],
         "title": "aa",
@@ -37,5 +49,24 @@
         "title": "xx",
         "courseId": "643",
         "instructorId": "3052"
+=======
+        "description": "c",
+        "students": [
+            "9329",
+            "2065"
+        ],
+        "title": "c",
+        "courseId": "2955",
+        "instructorId": "7746",
+        "lessons": []
+    },
+    {
+        "description": "d",
+        "students": ["2065"],
+        "title": "d",
+        "courseId": "1116",
+        "instructorId": "9358",
+        "lessons": []
+>>>>>>> Stashed changes
     }
 ]
