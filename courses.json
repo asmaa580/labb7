@@ -1,23 +1,41 @@
 [
     {
         "description": "a",
-        "students": [],
+        "students": [
+            "S001",
+            "S002",
+            "2757"
+        ],
         "title": "a",
         "courseId": "4981",
         "instructorId": "9863"
     },
     {
         "description": "b",
-        "students": [],
+        "students": ["malak"],
         "title": "b",
         "courseId": "2661",
         "instructorId": "3646"
     },
     {
-        "description": "c",
-        "students": ["9329"],
-        "title": "c",
-        "courseId": "2955",
-        "instructorId": "7746"
+        "description": "aa",
+        "students": ["asmaa"],
+        "title": "aa",
+        "courseId": "8066",
+        "instructorId": "7808"
+    },
+    {
+        "description": "z",
+        "students": [],
+        "title": "z",
+        "courseId": "7594",
+        "instructorId": "7814"
+    },
+    {
+        "description": "xxx",
+        "students": [],
+        "title": "xx",
+        "courseId": "643",
+        "instructorId": "3052"
     }
 ]

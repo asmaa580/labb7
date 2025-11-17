@@ -3,13 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.labb7;
+
 import com.mycompany.labb7.login;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author USER
  */
+
 public class Instructor1 extends javax.swing.JFrame {
 
     private User cu;
@@ -19,30 +23,52 @@ public class Instructor1 extends javax.swing.JFrame {
     public Instructor1(User u) {
         initComponents();
         this.cu=u;
-        loadInstructorCourses();
+        //loadInstructorCourses();
     }
      
     public Instructor1() {
+        
                 initComponents();
 
     }
     
     private void loadInstructorCourses(){
-    try{
-      courseComboBox.removeAllItems();
-      
-      for(Course c: JsonDataBaseManager.getAllCourses())
-      {
-       if(c.getInstructorId().equals(cu.getUserId()))
-       {courseComboBox.addItem(c.getTitle());
-       }
-      }
+  
+    try {
+        JsonDataBaseManager dbm = new JsonDataBaseManager();
+        ArrayList<Course> allCourses = dbm.getAllCourses1();
+        String courseId = jTextField3.getText().trim();
+
+        // Table only shows students
+        DefaultTableModel studentsModel = new DefaultTableModel();
+        studentsModel.addColumn("Student ID");
+        studentsTable.setModel(studentsModel);
+
+        boolean found = false;
+
+        for (Course c : allCourses) {
+            if(c.getCourseId().equals(courseId)) {
+                found = true;
+                for(String studentId : c.getStudents()) {
+                    studentsModel.addRow(new Object[]{ studentId });
+                }
+                break; // stop after finding the course
+            }
+        }
+
+        if (!found) {
+            JOptionPane.showMessageDialog(this, "Course ID not found.");
+        } else if (studentsTable.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No students enrolled in this course.");
+        }
+
+    } catch(Exception e) {
+        JOptionPane.showMessageDialog(this,"Error loading students: " + e.getMessage());
+        e.printStackTrace();
     }
-    catch(Exception e){
-     
-    }
+}
+
     
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,11 +87,11 @@ public class Instructor1 extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        courseComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         studentsTable = new javax.swing.JTable();
         loadBtn = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -144,13 +170,6 @@ public class Instructor1 extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab2", jPanel2);
 
-        courseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        courseComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                courseComboBoxActionPerformed(evt);
-            }
-        });
-
         studentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -164,14 +183,20 @@ public class Instructor1 extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(studentsTable);
 
-        loadBtn.setText("jButton3");
+        loadBtn.setText("search");
         loadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadBtnActionPerformed(evt);
             }
         });
 
-        jTextField3.setText("jTextField3");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("course id:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -180,16 +205,16 @@ public class Instructor1 extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(courseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(163, 163, 163)
-                        .addComponent(loadBtn)))
+                        .addComponent(loadBtn))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -197,8 +222,8 @@ public class Instructor1 extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(courseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                 .addGap(12, 12, 12)
@@ -242,37 +267,35 @@ public class Instructor1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-          login studentFrame = new login();
+        login studentFrame = new login();
         studentFrame.setVisible(true);
-        
-        
-        this.dispose();  
+
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        try{
-            String title =jTextField1.getText();
+        try {
+            String title = jTextField1.getText();
             String description = jTextField2.getText();
 
-            if(title.isEmpty())
-            {JOptionPane.showMessageDialog(this,"please enter a valid course title");
+            if (title.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "please enter a valid course title");
                 return;
             }
-            if(description.isEmpty())
-            {JOptionPane.showMessageDialog(this,"please enter a valid course description");
+            if (description.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "please enter a valid course description");
                 return;
             }
-            JsonDataBaseManager db= new JsonDataBaseManager();
-            Course newcourse=new Course(title,description,cu.getUserId());
+            JsonDataBaseManager db = new JsonDataBaseManager();
+            Course newcourse = new Course(title, description, cu.getUserId());
             db.addCourse(newcourse);
 
-            JOptionPane.showMessageDialog(this,"Course creted succeffully");
+            JOptionPane.showMessageDialog(this, "Course creted succeffully");
 
-        }
-        catch(Exception ex){
-JOptionPane.showMessageDialog(this,"Error: " + ex.getMessage());
-    ex.printStackTrace();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -280,84 +303,62 @@ JOptionPane.showMessageDialog(this,"Error: " + ex.getMessage());
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void courseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseComboBoxActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_courseComboBoxActionPerformed
-
     private void loadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadBtnActionPerformed
         // TODO add your handling code here:
-        try{
-          String selectedcourse= (String) courseComboBox.getSelectedItem();
-          if(selectedcourse==null)
-          {
-           JOptionPane.showMessageDialog(this, "No course selected");
-           return;
-          }
-        
-        Course target =null;
-        for(Course c: JsonDataBaseManager.getAllCourses()){
-        if(c.getTitle().equals(selectedcourse)&&c.getInstructorId().equals(cu.getUserId()))
-        {
-            target =c;
-            break;
-        }
-        }
-        
-        if(target==null)
-            JOptionPane.showMessageDialog(this, "Course not found");
-        return;
-        }
-        catch(Exception e){
-                JOptionPane.showMessageDialog(this, "ERROR");
-                }
+        loadInstructorCourses();
+
+
     }//GEN-LAST:event_loadBtnActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Instructor1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Instructor1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Instructor1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Instructor1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Instructor1().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(Instructor1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(Instructor1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(Instructor1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(Instructor1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new Instructor1().setVisible(true);
+        }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> courseComboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

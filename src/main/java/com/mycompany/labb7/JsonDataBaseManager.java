@@ -144,6 +144,50 @@ private static String getCourseTitleById(String courseId) throws IOException {
     return null; // Course not found
 } 
 
+public static ArrayList<Course> getAllCourses1() throws IOException {
+    JSONArray coursesArray = loadJson(COURSES_FILE);
+    if (coursesArray.length() == 0) 
+        return null;
+
+    ArrayList<Course> courses = new ArrayList<>();
+
+    for (int i = 0; i < coursesArray.length(); i++) {
+        JSONObject obj = coursesArray.getJSONObject(i);
+
+        // Students
+        JSONArray studentsArray = obj.has("students") ? obj.getJSONArray("students") : new JSONArray();
+        ArrayList<String> students = new ArrayList<>();
+        for (int j = 0; j < studentsArray.length(); j++) {
+            students.add(studentsArray.getString(j));
+        }
+
+        // Lessons
+        JSONArray lessonsArray = obj.has("lessons") ? obj.getJSONArray("lessons") : new JSONArray();
+        ArrayList<Lesson> lessons = new ArrayList<>();
+        for (int j = 0; j < lessonsArray.length(); j++) {
+            JSONObject lessonObj = lessonsArray.getJSONObject(j);
+            Lesson lesson = new Lesson(
+                lessonObj.getString("lessonId"),
+                lessonObj.getString("title"), 
+                lessonObj.getString("content")
+            );
+            lessons.add(lesson);
+        }
+
+        // Course object
+        Course course = new Course(
+            obj.getString("courseId"),
+            obj.getString("title"), 
+            obj.getString("description"), 
+            obj.getString("instructorId"),
+            students,
+            lessons
+        );
+        courses.add(course);
+    }
+
+    return courses;
+}
 
     public static ArrayList<Course> getAllCourses() throws IOException {
         JSONArray coursesArray = loadJson(COURSES_FILE);
@@ -185,6 +229,10 @@ courses.add(course);
         }
         return courses;
     }
+    
+    
+    
+    
     public static ArrayList<User> getStudentsForCourse(String courseId) throws IOException {
 
     ArrayList<User> result = new ArrayList<>();
