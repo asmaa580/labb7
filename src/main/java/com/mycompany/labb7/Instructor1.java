@@ -73,7 +73,7 @@ public class Instructor1 extends javax.swing.JFrame {
         boolean found = false;
 
         for (Course c : allCourses) {
-            if(c.getCourseId().equals(courseId)) {
+            if(c.getCourseId().equals(courseId)&&c.getInstructorId().equals(cu.getUserId())) {
                 found = true;
                 for(String studentId : c.getStudents()) {
                     studentsModel.addRow(new Object[]{ studentId });
@@ -141,7 +141,6 @@ public class Instructor1 extends javax.swing.JFrame {
 
         jLabel2.setText("description");
 
-        jTextField2.setText("jTextField2");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -237,6 +236,11 @@ public class Instructor1 extends javax.swing.JFrame {
         });
 
         jButton5.setText("log out");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -446,6 +450,19 @@ public class Instructor1 extends javax.swing.JFrame {
         // TODO add your handling code here:
          deleteLessonFromCourse();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        loadCoursesFromFile();
+        jTable1.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) {
+                int selectedRow = jTable1.getSelectedRow();
+                if (selectedRow != -1) {
+                    loadLessonsForCourse(selectedRow);
+                }
+            }
+ });
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -33,9 +33,26 @@
     },
     {
         "description": "learn science",
+        "students": ["0000"],
         "title": "science",
         "courseId": "7888",
         "instructorId": "8784",
+        "lessons": []
+    },
+    {
+        "description": "mathhh",
+        "students": ["9222"],
+        "title": "math",
+        "courseId": "5614",
+        "instructorId": "2618",
+        "lessons": []
+    },
+    {
+        "description": "logiccc",
+        "students": [],
+        "title": "logic",
+        "courseId": "199",
+        "instructorId": "2618",
         "lessons": []
     }
 ]

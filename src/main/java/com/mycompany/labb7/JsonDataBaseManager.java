@@ -63,7 +63,7 @@ public class JsonDataBaseManager {
         saveJson(USERS_FILE, users);
     }
 
-    public static User authenticate(String email, String passwordHash) throws IOException {
+   /* public static User authenticate(String email, String passwordHash) throws IOException {
         JSONArray users = loadJson(USERS_FILE);
         for (int i = 0; i < users.length(); i++) {
             JSONObject obj = users.getJSONObject(i);
@@ -73,7 +73,37 @@ public class JsonDataBaseManager {
             }
         }
         return null;
+    }*/
+    
+   public static User authenticate(String email, String passwordHash) throws IOException {
+    JSONArray users = loadJson(USERS_FILE);
+    for (int i = 0; i < users.length(); i++) {
+        JSONObject obj = users.getJSONObject(i);
+        if (obj.getString("email").equals(email) && obj.getString("passwordHash").equals(passwordHash)) {
+            String userId = obj.getString("userId");
+            String username = obj.getString("username");
+            String role = obj.getString("role");
+
+            if (role.equals("Student")) {
+                Studentt student = new Studentt(username, email, passwordHash);
+                student.setUserId(userId); // restore stored ID
+                return student;
+            } else {
+                Instructorr instructor = new Instructorr(username, email, passwordHash);
+                instructor.setUserId(userId); // restore stored ID
+                // also restore createdCourses if present
+                if (obj.has("createdCourses")) {
+                    JSONArray courses = obj.getJSONArray("createdCourses");
+                    for (int j = 0; j < courses.length(); j++) {
+                        instructor.addCourse(courses.getString(j));
+                    }
+                }
+                return instructor;
+            }
+        }
     }
+    return null; // authentication failed
+} 
 
     // ---------------- Courses ----------------
 
@@ -120,8 +150,8 @@ public class JsonDataBaseManager {
                 createdCourses = new JSONArray();
             }
             
-            // Add the course TITLE instead of ID
-            createdCourses.put(courseTitle);
+            
+            createdCourses.put(courseId);
             user.put("createdCourses", createdCourses);
             System.out.println("DEBUG: Added course TITLE to instructor: " + user.getString("email"));
             break; // Stop after first instructor found

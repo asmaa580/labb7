@@ -181,6 +181,14 @@ try
         JsonDataBaseManager db=new JsonDataBaseManager();
 
         SecurityHashing passwordHash=new SecurityHashing();
+        User authenticatedUser = db.authenticate(email, passwordHash.hashPassword(password)); 
+
+        if (authenticatedUser == null) {
+        JOptionPane.showMessageDialog(this, "Invalid Username or Password");
+        return;
+    }
+   String role = authenticatedUser.getRole();
+
         String s=db.authenticate(email,passwordHash.hashPassword(password)).getRole();
       if(s.equals("Student")&&u.equals("student")) 
       {
@@ -192,10 +200,10 @@ try
             this.dispose();  
         }
 
-    else if(s.equals("Instructor")&&u.equals("instructor"))
+    else if(role.equals("Instructor") && u.equalsIgnoreCase("instructor"))
     {
         JOptionPane.showMessageDialog(this,"Login Successful");
-         Instructor1 instructorFrame = new Instructor1(db.authenticate(email,passwordHash.hashPassword(password)));
+         Instructor1 instructorFrame = new Instructor1((Instructorr)authenticatedUser);
           instructorFrame.setVisible(true);
 
 

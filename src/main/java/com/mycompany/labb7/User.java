@@ -20,6 +20,10 @@ public abstract class User {
         this.passwordHash = passwordHash;
     }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+    
     public String getUserId() { return userId; }
     public String getUsername() { return username; }
     public String getEmail() { return email; }
