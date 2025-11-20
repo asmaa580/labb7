@@ -23,7 +23,7 @@ import javax.swing.JTable;
 public class Instructor1 extends javax.swing.JFrame {
 
     private User cu;
-    
+    private List<Course> displayedCourses = new ArrayList<>();
     //private jTable coursesTable;
     private DefaultTableModel coursesModel;
     private ArrayList<Course> allCourses = new ArrayList<>();
@@ -235,7 +235,7 @@ public class Instructor1 extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("log out");
+        jButton5.setText("search");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -415,7 +415,7 @@ public class Instructor1 extends javax.swing.JFrame {
             Course newcourse = new Course(title, description, cu.getUserId());
             db.addCourse(newcourse);
 
-            JOptionPane.showMessageDialog(this, "Course creted succeffully");
+            JOptionPane.showMessageDialog(this, "Course created succeffully");
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
@@ -485,6 +485,7 @@ public class Instructor1 extends javax.swing.JFrame {
     private void loadCoursesFromFile() {
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
     model.setRowCount(0);
+    displayedCourses.clear();
 
     try {
         JsonDataBaseManager dbm=new JsonDataBaseManager();
@@ -493,13 +494,15 @@ public class Instructor1 extends javax.swing.JFrame {
         System.out.println(allCourses);
         for (int i = 0; i < allCourses.size(); i++) {
             Course course = allCourses.get(i);
+            if(course.getInstructorId().equals(cu.userId)){
             model.addRow(new Object[]{
                 course.getTitle(),
                 course.getDescription(),
                 course.getCourseId(),
                 course.getInstructorId()
             });
-        }
+            displayedCourses.add(course);
+        }}
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error loading courses: " + e.getMessage());
@@ -507,23 +510,22 @@ public class Instructor1 extends javax.swing.JFrame {
 }
     
 
-    private void loadLessonsForCourse(int index) {
+    private void loadLessonsForCourse(int tableIndex) {
     DefaultTableModel lessonModel = (DefaultTableModel) jTable2.getModel();
     lessonModel.setRowCount(0);
 
-    Course selectedCourse = allCourses.get(index);
-
+   // Course selectedCourse = allCourses.get(index);
+    Course selectedCourse = displayedCourses.get(tableIndex);
     List<Lesson> lessons = selectedCourse.getLessons();
     if (lessons == null) return;
-
+    
     for (Lesson lesson : lessons) {
         lessonModel.addRow(new Object[]{
             lesson.getLessonId(),
             lesson.getTitle(),
             lesson.getContent()
    });
-}
-}
+}}
     private void saveCoursesToFile() {
     try {
         JSONArray arr = new JSONArray();
@@ -567,20 +569,24 @@ public class Instructor1 extends javax.swing.JFrame {
         return;
     }
 
-    Course course = allCourses.get(selectedCourse);
+    Course course = displayedCourses.get(selectedCourse);
 
     // Example inputs (you can replace with a form dialog later)
     String id = JOptionPane.showInputDialog("Lesson ID:");
     String title = JOptionPane.showInputDialog("Lesson Title:");
     String content = JOptionPane.showInputDialog("Lesson Content:");
+    if(id==null||id.isEmpty()||title==null||title.isEmpty()||content==null||content.isEmpty()){
+    JOptionPane.showMessageDialog(this, "can't be added");
 
+    }
+    else{
     Lesson lesson = new Lesson(id, title, content, new ArrayList<>());
 
     course.getLessons().add(lesson);
 
     loadLessonsForCourse(selectedCourse);  // reload table
     saveCoursesToFile();                   // write to courses.json
-}
+}}
     
     private void deleteLessonFromCourse() {
     int selectedCourse = jTable1.getSelectedRow();
@@ -594,8 +600,8 @@ public class Instructor1 extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Select a lesson to delete!");
         return;
     }
-
-    Course course = allCourses.get(selectedCourse);
+  
+    Course course = displayedCourses.get(selectedCourse);
     course.getLessons().remove(selectedLesson);
 
     loadLessonsForCourse(selectedCourse);

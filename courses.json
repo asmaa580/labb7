@@ -24,16 +24,10 @@
         "title": "Python Programming",
         "courseId": "C002",
         "instructorId": "U003",
-        "lessons": [{
-            "lessonId": "L003",
-            "resources": [],
-            "title": "Introduction to Python",
-            "content": "Python is a programming language..."
-        }]
+        "lessons": []
     },
     {
         "description": "learn science",
-        "students": ["0000"],
         "title": "science",
         "courseId": "7888",
         "instructorId": "8784",
@@ -41,7 +35,6 @@
     },
     {
         "description": "mathhh",
-        "students": ["9222"],
         "title": "math",
         "courseId": "5614",
         "instructorId": "2618",
@@ -49,9 +42,29 @@
     },
     {
         "description": "logiccc",
-        "students": [],
         "title": "logic",
         "courseId": "199",
+        "instructorId": "2618",
+        "lessons": [
+            {
+                "lessonId": "L009",
+                "resources": [],
+                "title": "new lesson ",
+                "content": "nothing"
+            },
+            {
+                "lessonId": "L0010",
+                "resources": [],
+                "title": "intro",
+                "content": "aa"
+            }
+        ]
+    },
+    {
+        "description": "s",
+        "students": [],
+        "title": "signals",
+        "courseId": "4769",
         "instructorId": "2618",
         "lessons": []
     }
