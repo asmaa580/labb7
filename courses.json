@@ -1,71 +1,11 @@
-[
-    {
-        "description": "Learn the basics of Java",
-        "title": "Java Programming",
-        "courseId": "C001",
-        "instructorId": "U002",
-        "lessons": [
-            {
-                "lessonId": "L001",
-                "resources": [],
-                "title": "Introduction to Java",
-                "content": "Java is a programming language..."
-            },
-            {
-                "lessonId": "L002",
-                "resources": [],
-                "title": "Variables and Data Types",
-                "content": "Variables store data..."
-            }
-        ]
-    },
-    {
-        "description": "Learn Python from scratch",
-        "title": "Python Programming",
-        "courseId": "C002",
-        "instructorId": "U003",
-        "lessons": []
-    },
-    {
-        "description": "learn science",
-        "title": "science",
-        "courseId": "7888",
-        "instructorId": "8784",
-        "lessons": []
-    },
-    {
-        "description": "mathhh",
-        "title": "math",
-        "courseId": "5614",
-        "instructorId": "2618",
-        "lessons": []
-    },
-    {
-        "description": "logiccc",
-        "title": "logic",
-        "courseId": "199",
-        "instructorId": "2618",
-        "lessons": [
-            {
-                "lessonId": "L009",
-                "resources": [],
-                "title": "new lesson ",
-                "content": "nothing"
-            },
-            {
-                "lessonId": "L0010",
-                "resources": [],
-                "title": "intro",
-                "content": "aa"
-            }
-        ]
-    },
-    {
-        "description": "s",
-        "students": [],
-        "title": "signals",
-        "courseId": "4769",
-        "instructorId": "2618",
-        "lessons": []
-    }
-]
+[{
+    "description": "learn maths",
+    "students": [
+        "3655",
+        "9217"
+    ],
+    "title": "maths",
+    "courseId": "3254",
+    "instructorId": "4150",
+    "lessons": []
+}]

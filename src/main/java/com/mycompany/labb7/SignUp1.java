@@ -159,6 +159,12 @@ public class SignUp1 extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this,"This email is unvalid . make sure to add @");
         return;
        }
+       
+       if(!jTextField2.getText().contains(".com"))
+       {
+           JOptionPane.showMessageDialog(this,"This email is unvalid . make sure to add .com");
+        return;
+       }   
             
         
         String u= jComboBox1.getSelectedItem().toString();
@@ -170,6 +176,7 @@ public class SignUp1 extends javax.swing.JFrame {
        
         Studentt s=new Studentt(jTextField1.getText(),jTextField2.getText(), hash.hashPassword(jTextField4.getText()));
         db.addUser(s);
+        String id=s.userId;
         Student studentFrame = new Student();
         studentFrame.setVisible(true);
         this.dispose();  
