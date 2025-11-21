@@ -3,7 +3,8 @@
         "role": "Student",
         "enrolledCourses": [
             "3254",
-            "C001"
+            "C001",
+            "C002"
         ],
         "progress": {},
         "userId": "3655",
