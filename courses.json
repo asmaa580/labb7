@@ -28,7 +28,7 @@
     },
     {
         "description": "Learn Python from scratch",
-        "students": [],
+        "students": ["3655"],
         "title": "Python Programming",
         "courseId": "C002",
         "instructorId": "U003",

@@ -74,6 +74,7 @@ public class Student extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         lessonsTabel = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,7 +107,7 @@ public class Student extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(148, 148, 148)
+                .addGap(180, 180, 180)
                 .addComponent(enroll)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -115,9 +116,9 @@ public class Student extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(31, 31, 31)
                 .addComponent(enroll)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("browse", jPanel1);
@@ -192,20 +193,34 @@ public class Student extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(lessonsTabel);
 
+        jButton2.setText("Mark lesson as completed");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(jButton2)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 231, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jButton2)
+                .addGap(0, 180, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lessons", jPanel3);
@@ -361,6 +376,33 @@ public class Student extends javax.swing.JFrame {
         
     }//GEN-LAST:event_loadBtn1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int selectedRow=lessonsTabel.getSelectedRow();
+        int selectedrow=studentsTable.getSelectedRow();
+        if(selectedRow==-1)
+        {
+            JOptionPane.showMessageDialog(this,"Please select a lesson to mark as complete");
+            return;
+        }
+        Object lessonId=lessonsTabel.getValueAt(selectedRow,0);
+        Object courseId=studentsTable.getValueAt(selectedrow,0);
+        try{
+        ArrayList<Studentt> students=JsonDataBaseManager.getStudentsForCourse((String)courseId);
+        for(Studentt s:students)
+            if(s.getUserId().equals(id)){
+        s.completeLesson((String)courseId,(String)lessonId);
+        JsonDataBaseManager.updateStudent(s);
+        JOptionPane.showMessageDialog(this,"Lesson completed succesfully");
+        break;
+        }}
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this,"No such course");
+        }
+       
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -399,6 +441,7 @@ public class Student extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton enroll;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

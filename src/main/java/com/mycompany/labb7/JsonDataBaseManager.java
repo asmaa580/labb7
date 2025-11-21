@@ -13,6 +13,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JsonDataBaseManager {
     private static final String USERS_FILE = "users.json";
@@ -326,9 +328,9 @@ public static Studentt getStudentById(String studentId) throws IOException {
 
 
 
-    public static ArrayList<User> getStudentsForCourse(String courseId) throws IOException {
+    public static ArrayList<Studentt> getStudentsForCourse(String courseId) throws IOException {
 
-    ArrayList<User> result = new ArrayList<>();
+    ArrayList<Studentt> result = new ArrayList<>();
 
     JSONArray courses = loadJson(COURSES_FILE);
     JSONArray users = loadJson(USERS_FILE);
@@ -367,4 +369,48 @@ public static Studentt getStudentById(String studentId) throws IOException {
     return result;
 }
 
+ public static void updateStudent(Studentt updatedStudent) throws IOException {
+    // Read all users from the JSON file
+    JSONArray allUsers = loadJson("users.json");
+    
+    // Find and update the specific student
+    for (int i = 0; i < allUsers.length(); i++) {
+        JSONObject user = allUsers.getJSONObject(i);
+        if (user.getString("userId").equals(updatedStudent.getUserId())) {
+            // Create updated JSON object directly
+            JSONObject updatedUser = new JSONObject();
+            updatedUser.put("userId", updatedStudent.getUserId());
+            updatedUser.put("username", updatedStudent.getUsername());
+            updatedUser.put("email", updatedStudent.getEmail());
+            updatedUser.put("passwordHash", updatedStudent.getPasswordHash());
+            updatedUser.put("role", "student");
+            
+            // Add enrolled courses
+            JSONArray enrolledCourses = new JSONArray();
+            for (String courseId : updatedStudent.getEnrolledCourses()) {
+                enrolledCourses.put(courseId);
+            }
+            updatedUser.put("enrolledCourses", enrolledCourses);
+            
+            // Add progress data
+            JSONObject progressJson = new JSONObject();
+            HashMap<String, ArrayList<String>> progress = updatedStudent.getProgress();
+            for (Map.Entry<String, ArrayList<String>> entry : progress.entrySet()) {
+                JSONArray lessonsArray = new JSONArray();
+                for (String lessonId : entry.getValue()) {
+                    lessonsArray.put(lessonId);
+                }
+                progressJson.put(entry.getKey(), lessonsArray);
+            }
+            updatedUser.put("progress", progressJson);
+            
+            // Replace the old data
+            allUsers.put(i, updatedUser);
+            break;
+        }
+    }
+    
+    // Save the updated array back to the file
+    saveJson("users.json", allUsers);
+}
 }
