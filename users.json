@@ -1,7 +1,10 @@
 [
     {
         "role": "Student",
-        "enrolledCourses": ["3254"],
+        "enrolledCourses": [
+            "3254",
+            "C001"
+        ],
         "progress": {},
         "userId": "3655",
         "email": "asmaa@gmail.com",

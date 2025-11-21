@@ -177,7 +177,7 @@ public class SignUp1 extends javax.swing.JFrame {
         Studentt s=new Studentt(jTextField1.getText(),jTextField2.getText(), hash.hashPassword(jTextField4.getText()));
         db.addUser(s);
         String id=s.userId;
-        Student studentFrame = new Student();
+        Student studentFrame = new Student(id);
         studentFrame.setVisible(true);
         this.dispose();  
        

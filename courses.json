@@ -1,11 +1,42 @@
-[{
-    "description": "learn maths",
-    "students": [
-        "3655",
-        "9217"
-    ],
-    "title": "maths",
-    "courseId": "3254",
-    "instructorId": "4150",
-    "lessons": []
-}]
+[
+    {
+        "description": "Learn the basics of Java",
+        "students": [
+            "U001",
+            "3655"
+        ],
+        "title": "Java Programming",
+        "courseId": "C001",
+        "instructorId": "U002",
+        "lessons": [
+            {
+                "lessonId": "L001",
+                "resources": [
+                    "slides.pdf",
+                    "video.mp4"
+                ],
+                "title": "Introduction to Java",
+                "content": "Java is a programming language..."
+            },
+            {
+                "lessonId": "L002",
+                "resources": [],
+                "title": "Variables and Data Types",
+                "content": "Variables store data..."
+            }
+        ]
+    },
+    {
+        "description": "Learn Python from scratch",
+        "students": [],
+        "title": "Python Programming",
+        "courseId": "C002",
+        "instructorId": "U003",
+        "lessons": [{
+            "lessonId": "L003",
+            "resources": ["python_intro.pdf"],
+            "title": "Introduction to Python",
+            "content": "Python is a programming language..."
+        }]
+    }
+]
