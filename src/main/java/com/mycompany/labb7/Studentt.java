@@ -32,6 +32,7 @@ public class Studentt extends User {
             progress.put(courseId, new ArrayList<>());
         }
     }
+    
 
     public void completeLesson(String courseId, String lessonId) {
         if (progress.containsKey(courseId)) {

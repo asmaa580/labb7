@@ -323,6 +323,7 @@ public class Student extends javax.swing.JFrame {
             return;
         }
         try{
+            Studentt st = JsonDataBaseManager.getStudentById(id);
         ArrayList<Course> enrolledCourses=JsonDataBaseManager.getEnrolledCourses(id);
         Object courseId = studentsTable.getValueAt(selectedRow, 0);
         for(Course c:enrolledCourses)
@@ -337,14 +338,17 @@ public class Student extends javax.swing.JFrame {
         lessonsModel.addColumn("lesson ID");
         lessonsModel.addColumn("lesson title");
         lessonsModel.addColumn("lesson content");
+        lessonsModel.addColumn("status");
         lessonsTabel.setModel(lessonsModel);
-        
+        ArrayList<String> completed = st.getProgress().getOrDefault(courseId.toString(), new ArrayList<>());
         for (Lesson l : lessons) {
+            String status = completed.contains(l.getLessonId()) ? 
+                                    "Completed" : 
+                                    "Not Completed";
     lessonsModel.addRow(new Object[]{
             l.getLessonId(),
             l.getTitle(),
-            l.getContent()
-           });
+            l.getContent(),status});
         }
                 
             }

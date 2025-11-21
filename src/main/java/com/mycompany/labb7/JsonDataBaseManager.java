@@ -287,6 +287,41 @@ public static ArrayList<Course> getEnrolledCourses(String studentId) throws IOEx
 
     return result;
 }
+public static Studentt getStudentById(String studentId) throws IOException {
+    JSONArray users = loadJson("users.json");
+
+    for (int i = 0; i < users.length(); i++) {
+        JSONObject obj = users.getJSONObject(i);
+
+        if (obj.getString("userId").equals(studentId)) {
+            Studentt s = new Studentt(
+                obj.getString("username"),
+                obj.getString("email"),
+                obj.getString("passwordHash")
+            );
+            s.setUserId(studentId);
+
+            // load enrolled courses
+            JSONArray enrolled = obj.getJSONArray("enrolledCourses");
+            for (int j = 0; j < enrolled.length(); j++)
+                s.getEnrolledCourses().add(enrolled.getString(j));
+
+            // load progress
+            JSONObject prog = obj.getJSONObject("progress");
+            for (String courseId : prog.keySet()) {
+                JSONArray arr = prog.getJSONArray(courseId);
+                ArrayList<String> done = new ArrayList<>();
+                for (int k = 0; k < arr.length(); k++)
+                    done.add(arr.getString(k));
+                s.getProgress().put(courseId, done);
+            }
+
+            return s;
+        }
+    }
+
+    return null;
+}
 
 
 
